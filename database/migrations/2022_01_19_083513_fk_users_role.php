@@ -14,6 +14,7 @@ class FkUsersRole extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('role_id')->nullable(false)->default(2);
             $table->foreign('role_id')->references('id')->on('role');
         });
     }

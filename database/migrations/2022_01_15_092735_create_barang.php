@@ -15,9 +15,9 @@ class CreateBarang extends Migration
     {
         Schema::create('barang', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 32);
             $table->longText('description');
-            $table->string('file_path');
+            $table->string('file_path', 50);
             $table->decimal('price');
             $table->timestamps();
             $table->softDeletes();
