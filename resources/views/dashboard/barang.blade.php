@@ -50,7 +50,7 @@
                     <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">All products</h1>
                 </div>
                 <div class="block sm:flex items-center md:divide-x md:divide-gray-100">
-                    <form class="sm:pr-3 mb-4 sm:mb-0" action="#" method="POST">
+                    <form class="sm:pr-3 mb-4 sm:mb-0" action="{{ route('barang.search') }}" method="POST">
                         @csrf
                         <label for="products-search" class="sr-only">Search</label>
                         <div class="mt-1 relative sm:w-64 xl:w-96">
@@ -108,7 +108,7 @@
                                     d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                     clip-rule="evenodd"></path>
                             </svg>
-                            <a href="{{ route('dashboard.barang.add') }}" target=" _blank">Add product </a>
+                            <a href="{{ route('barang.create') }}" target=" _blank">Add product </a>
                     </div>
                 </div>
             </div>
@@ -166,8 +166,8 @@
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             Rp{{ $elemen->price }}</td>
                                         <td class="p-4 whitespace-nowrap space-x-2">
-                                            <button type="button" data-modal-toggle="product-modal"
-                                                onclick="location.href='/dashboard/barang/edit/{{ $elemen->id }}'"
+                                            <a data-modal-toggle=" product-modal"
+                                                href="{{ route('barang.edit', $elemen) }}"
                                                 class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-200 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
                                                 <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -179,7 +179,7 @@
                                                         clip-rule="evenodd"></path>
                                                 </svg>
                                                 Edit item
-                                            </button>
+                                            </a>
                                             <form action="{{ route('barang.destroy', $elemen->id) }}"
                                                 class="inline" method="post">
                                                 @method('delete')

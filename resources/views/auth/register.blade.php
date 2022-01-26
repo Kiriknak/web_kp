@@ -142,6 +142,59 @@
                                      rounded w-64 py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500 transition duration-500 ease-in-out"></textarea>
                             </div>
                         </div>
+                        <div class="mb-8">
+                            <label for="kodepos" class="block text-gray-700 text-sm font-bold mb-2">
+                                Kodepos
+                            </label>
+                            <div class="mt-1 relative rounded-md shadow-sm w-64 max-w-[75%]">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                    </svg>
+                                </div>
+                                <input name="kodepos" id="kodepos" type="number"
+                                    class="block pr-10 max-w-full shadow appearance-none border-2  border-gray-300
+                                     rounded w-64 py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500 transition duration-500 ease-in-out">
+                            </div>
+                        </div>
+                        <div class="mb-8">
+                            <label for="kodepos" class="block text-gray-700 text-sm font-bold mb-2">
+                                Kabupaten/Kota
+                            </label>
+                            <div class="mt-1 relative rounded-md shadow-sm w-64 max-w-[75%]">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                    </svg>
+                                </div>
+                                <input name="kabupaten" id="kabupaten" type="text"
+                                    class="block pr-10 max-w-full shadow appearance-none border-2  border-gray-300
+                                     rounded w-64 py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500 transition duration-500 ease-in-out">
+                            </div>
+                        </div>
+                        <div class="mb-8">
+                            <label for="kodepos" class="block text-gray-700 text-sm font-bold mb-2">
+                                Provinsi
+                            </label>
+                            <div class="mt-1 relative rounded-md shadow-sm w-64 max-w-[75%]">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                    </svg>
+                                </div>
+                                <input name="state" id="state" type="text"
+                                    class="block pr-10 max-w-full shadow appearance-none border-2  border-gray-300
+                                     rounded w-64 py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500 transition duration-500 ease-in-out">
+                            </div>
+                        </div>
+
+
 
                         @if ($errors->any())
                             @foreach ($errors->all() as $error)

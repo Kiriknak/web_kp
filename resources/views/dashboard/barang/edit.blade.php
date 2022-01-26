@@ -41,7 +41,7 @@
                                             d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    <a href="{{ route('dashboard.barang') }}"
+                                    <a href="{{ route('barang.index') }}"
                                         class="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium">Barang</a>
                                 </div>
                             </li>
@@ -74,71 +74,74 @@
                             </div>
 
                             <div class="p-6 space-y-6">
-                                <form method="post" action="{{ route('barang.update') }}" enctype="multipart/form-data">
+                                <form method="post" action="{{ route('barang.update', $barang) }}"
+                                    enctype="multipart/form-data">
                                     @csrf
-                                    <div class="grid grid-cols-6 gap-6">
-                                        <div class="col-span-6 sm:col-span-3">
-                                            <label for="nama" class="text-sm font-medium text-gray-900 block mb-2">Nama
-                                                Barang</label>
-                                            <input type="text" name="name" id="name"
-                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                                placeholder="" required="" value="{{ $barang->name }}">
-                                        </div>
-                                        <div class="col-span-6 sm:col-span-3">
-                                            <label for="price"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Price</label>
-                                            <input type="number" name="price" id="price"
-                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                                placeholder="" required="" value="{{ $barang->price }}">
-                                        </div>
-                                        <div class="col-span-full">
-                                            <label for="description"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Detail Barang</label>
-                                            <textarea id="description" rows="6" name="description"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
-                                                placeholder="e.g. 3.8GHz 8-core 10th-generation Intel Core i7 processor, Turbo Boost up to 5.0GHz, Ram 16 GB DDR4 2300Mhz"
-                                                value="">{{ $barang->description }}</textarea>
-                                        </div>
-                                        <div class="col-span-full">
-                                            <div class="m-4">
-                                                <label class="inline-block mb-2 text-gray-500">Upload Gambar</label>
-                                                <img class="img-preview img-fluid mb-3 col-sm-5  object-contain	"
-                                                    src="{{ asset('/storage/product/' . $barang->file_path) }}">
-                                                <div class="flex items-center justify-center w-full">
-                                                    <label
-                                                        class="flex flex-col w-full h-32 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                                        <div class="flex flex-col items-center justify-center pt-7">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
-                                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                                            </svg>
-                                                            <p
-                                                                class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                                                Attach a file</p>
-                                                        </div>
-                                                        <input type="file" class="opacity-0" name="image"
-                                                            onchange="previewImage()" id="image" />
-                                                    </label>
-                                                </div>
+                                    @method('put')
+                                    <input type="hidden" name="id" value="{{ $barang->id }}" <div
+                                        class="grid grid-cols-6 gap-6">
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="nama" class="text-sm font-medium text-gray-900 block mb-2">Nama
+                                            Barang</label>
+                                        <input type="text" name="name" id="name"
+                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                                            placeholder="" required="" value="{{ $barang->name }}">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="price"
+                                            class="text-sm font-medium text-gray-900 block mb-2">Price</label>
+                                        <input type="number" name="price" id="price"
+                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                                            placeholder="" required="" value="{{ $barang->price }}">
+                                    </div>
+                                    <div class="col-span-full">
+                                        <label for="description" class="text-sm font-medium text-gray-900 block mb-2">Detail
+                                            Barang</label>
+                                        <textarea id="description" rows="6" name="description"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
+                                            placeholder="e.g. 3.8GHz 8-core 10th-generation Intel Core i7 processor, Turbo Boost up to 5.0GHz, Ram 16 GB DDR4 2300Mhz"
+                                            value="">{{ $barang->description }}</textarea>
+                                    </div>
+                                    <div class="col-span-full">
+                                        <div class="m-4">
+                                            <label class="inline-block mb-2 text-gray-500">Upload Gambar</label>
+                                            <img class="img-preview img-fluid mb-3 col-sm-5  object-contain	"
+                                                src="{{ asset('images/' . $barang->file_path) }} ">
+                                            <div class="flex items-center justify-center w-full">
+                                                <label
+                                                    class="flex flex-col w-full h-32 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                                    <div class="flex flex-col items-center justify-center pt-7">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                                        </svg>
+                                                        <p
+                                                            class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                                            Attach a file</p>
+                                                    </div>
+                                                    <input type="file" class="opacity-0" name="image"
+                                                        onchange="previewImage()" id="image" />
+                                                </label>
                                             </div>
                                         </div>
-
                                     </div>
 
                             </div>
 
-                            <div class="p-6 border-t border-gray-200 rounded-b">
-                                <button
-                                    class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                    type="submit">Edit product</button>
-                            </div>
-                            </form>
                         </div>
+
+                        <div class="p-6 border-t border-gray-200 rounded-b">
+                            <button
+                                class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                type="submit">Edit product</button>
+                        </div>
+                        </form>
                     </div>
                 </div>
+            </div>
     </main>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 

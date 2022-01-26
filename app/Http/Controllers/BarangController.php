@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class BarangController extends Controller
 {
@@ -21,6 +22,8 @@ class BarangController extends Controller
 
     public function search(Request $request)
     {
+
+
         $barang = Barang::where('name', 'like', '%' . $request->input('name') . '%')->paginate();
 
         return view('dashboard.barang', compact('barang'), ['title' => 'Dashboard Barang']);
@@ -33,8 +36,9 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.barang.add');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -52,8 +56,6 @@ class BarangController extends Controller
 
         $request->file('image')->storePublicly('product', 'public');
 
-
-
         $barang = Barang::create(
             [
                 'name' => $validated['name'],
@@ -63,7 +65,7 @@ class BarangController extends Controller
             ]
         );
 
-        return redirect(route('dashboard.barang'))->withSuccess($barang);
+        return redirect(route('barang.index'))->withSuccess($barang);
     }
 
     /**
@@ -82,11 +84,10 @@ class BarangController extends Controller
      * @param  \App\Models\barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Barang $barang)
     {
-        $barang = Barang::find($id);
-        // dd($barang);
-        return view('dashboard.barang.edit', compact('barang'));
+
+        return view('dashboard.barang.edit', ['barang' => $barang]);
     }
 
     /**
@@ -96,10 +97,8 @@ class BarangController extends Controller
      * @param  \App\Models\Barang  $Barang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Barang $barang)
     {
-        $barang = Barang::find($id);
-
         $validated = $request->validate([
             'name' => 'required',
             'price' => 'numeric|required',

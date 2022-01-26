@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PenjualanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,32 +27,35 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about', ['title' => "About"]);
 });
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-
-Route::post('/register', [RegisterController::class, 'store']);
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::group(['middleware' => 'admin', 'prefix' => 'dashboard'], function () {
-    Route::get('/barang', [BarangController::class, 'index'])->name('dashboard.barang');
 
-    Route::get('/barang/add', function () {
-        return view('dashboard.barang.add');
-    })->name('dashboard.barang.add');
     Route::get('/', function () {
         return view('dashboard.main');
     })->name('dashboard');
 
+    Route::resource('barang', BarangController::class);
+    Route::post('barang/search', [BarangController::class, 'search'])->name('barang.search');
 
-    Route::post('/barang/add', [BarangController::class, 'store'])->name('barang.add');
-    Route::post('/barang', [BarangController::class, 'search']);
-    Route::get('/barang/{id}', [BarangController::class, 'edit']);
 
-    Route::post('/barang/{id}', [BarangController::class, 'update'])->name('barang.update');
 
-    Route::delete('/barang/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
+    Route::resource('penjualan', PenjualanController::class);
+
+    Route::resource('users', UserController::class)->except('show');
+    Route::get('users/admin', [UserController::class, 'createAdmin'])->name('admin.create');
+    Route::post('users/admin', [UserController::class, 'storeAdmin'])->name('admin.store');
+
+
+    Route::resource('customer', CustomerController::class);
+    Route::post('customer/search', [BarangController::class, 'search'])->name('customer.search');
+    // Route::resource('pembayaran', BarangController::class);
 });
+Route::group(['middleware' => 'guest',], function () {
+    Route::get('/login', [UserController::class, 'login'])->name('login');
+    Route::post('/login', [UserController::class, 'authenticate']);
+    Route::get('/register', [UserController::class, 'register'])->name('register');
 
-Route::resource('Barang', BarangController::class); // Laravel 8
+    Route::post('/register', [UserController::class, 'store']);
+});
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');

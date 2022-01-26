@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 64)->nullable(false);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

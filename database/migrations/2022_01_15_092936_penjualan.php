@@ -15,10 +15,14 @@ class Penjualan extends Migration
     {
         Schema::create('penjualan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pembeli_id')->constrained('users');
             $table->foreignId('barang_id')->constrained('barang');
             $table->decimal('jumlah');
             $table->timestamps();
+            //             Nama	Tipe Data	Panjang	Key
+            //          Id	Integer		PK
+            //          id_customer	integer		FK
+            //          tanggal	Datetime		
+
         });
     }
 

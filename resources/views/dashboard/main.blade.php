@@ -4,7 +4,7 @@
 
     <div class="flex overflow-hidden bg-white pt-16">
         <aside id="sidebar"
-            class="fixed hidden z-20 h-full top-0 left-0 pt-16  lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75"
+            class="fixed hidden z-20 h-full top-0 left-0 pt-16  lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75 "
             aria-label="Sidebar">
             <div class="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0">
                 <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
@@ -29,7 +29,7 @@
                                 </form>
                             </li>
                             <li>
-                                <a href="/"
+                                <a href="{{ route('dashboard') }}"
                                     class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
                                     <svg class="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75"
                                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('dashboard.barang') }}"
+                                <a href="{{ route('barang.index') }}"
                                     class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                     <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
                                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +54,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/penjualan"
+                                <a href="{{ route('penjualan.index') }}"
                                     class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75 "
@@ -68,7 +68,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/pembayaran"
+                                <a href="{{ route('users.index') }}"
                                     class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                     <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
                                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -80,7 +80,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/users"
+                                <a href="{{ route('users.index') }}"
                                     class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                     <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
                                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

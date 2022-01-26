@@ -74,7 +74,7 @@
                             </div>
 
                             <div class="p-6 space-y-6">
-                                <form action="{{ route('barang.add') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="grid grid-cols-6 gap-6">
                                         <div class="col-span-6 sm:col-span-3">
@@ -96,7 +96,7 @@
                                                 class="text-sm font-medium text-gray-900 block mb-2">Detail Barang</label>
                                             <textarea id="description" rows="6" name="description"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
-                                                placeholder="e.g. 3.8GHz 8-core 10th-generation Intel Core i7 processor, Turbo Boost up to 5.0GHz, Ram 16 GB DDR4 2300Mhz"></textarea>
+                                                placeholder=""></textarea>
                                         </div>
                                         <div class="col-span-full">
                                             <div class="m-4">
@@ -118,7 +118,7 @@
                                                                 Attach a file</p>
                                                         </div>
                                                         <input type="file" class="opacity-0" name="image"
-                                                            onchange="previewImage()" id="image" />
+                                                            accept=".jpg,.png,.jpeg" onchange="previewImage()" id="image" />
                                                     </label>
                                                 </div>
                                             </div>
