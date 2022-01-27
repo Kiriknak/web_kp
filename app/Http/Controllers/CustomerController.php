@@ -15,8 +15,8 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $customer = Customer::latest()->paginate(10);
-        return view('dashboard.customer', compact('customer'), ['title' => 'Dashboard Customer']);
+        $customer = Customer::paginate(10);
+        return view('dashboard.customer.index', compact('customer'), ['title' => 'Dashboard Customer']);
     }
     /**
      * Show the form for creating a new resource.
@@ -25,7 +25,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.customer.add');
     }
 
     public function search(Request $request)
@@ -40,7 +40,26 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'name'   => 'required',
+            'phone' => 'required|unique:customers,telepon|numeric',
+            'alamat' => 'required',
+            'kodepos' => 'required|numeric',
+            'kabupaten' => 'required',
+            'state' => 'required'
+        ]);
+
+        Customer::create([
+            'nama' => $validated['name'],
+            'alamat' => $validated['alamat'],
+            'kodepos' => $validated['kodepos'],
+            'kabupaten' => $validated['kabupaten'],
+            'provinsi' => $validated['state'],
+            'telepon' => $validated['phone'],
+            'user_id' => null
+        ]);
+        return back()->with('msg', 'Customer added successfully');
     }
 
     /**
@@ -62,7 +81,8 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+
+        return view('dashboard.customer.edit', ['customer' => $customer]);
     }
 
     /**
@@ -74,7 +94,22 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'alamat' => 'required',
+            'phone' => 'numeric|required',
+            'kodepos' => 'required',
+            'kabupaten' => 'required',
+            'state' => 'required',
+        ]);
+        $customer->nama = $validated['name'];
+        $customer->alamat = $validated['alamat'];
+        $customer->telepon = $validated['phone'];
+        $customer->kabupaten = $validated['kabupaten'];
+        $customer->provinsi = $validated['state'];
+        $customer->save();
+
+        return back()->with('msg', 'Successfully updated');
     }
 
     /**

@@ -126,13 +126,7 @@
                         <table class="table-fixed min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-100">
                                 <tr>
-                                    <th scope="col" class="p-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-all" aria-describedby="checkbox-1" type="checkbox"
-                                                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-yellow-200 h-4 w-4 rounded">
-                                            <label for="checkbox-all" class="sr-only">checkbox</label>
-                                        </div>
-                                    </th>
+
                                     <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                                         Email
                                     </th>
@@ -151,13 +145,16 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                                 <?php $__currentLoopData = $customer; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $elemen): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="hover:bg-gray-100">
-                                        <td class="p-4 w-4">
-                                            <div class="flex items-center">
-                                                <input id="checkbox-194556" aria-describedby="checkbox-1" type="checkbox"
-                                                    class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-yellow-200 h-4 w-4 rounded">
-                                                <label for="checkbox-194556" class="sr-only">checkbox</label>
-                                            </div>
+                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                            #<?php echo e($elemen->id); ?>
+
                                         </td>
+
+                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                            <?php echo e($elemen->nama); ?>
+
+                                        </td>
+
                                         <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
                                             <div class="text-base font-semibold text-gray-900"><?php echo e($elemen->alamat); ?>
 
@@ -168,18 +165,40 @@
                                             </div>
                                         </td>
 
+
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            #<?php echo e($elemen->id); ?>
+                                            <?php
+                                                if ($elemen->user != null) {
+                                                    echo $elemen->user->email;
+                                                } else {
+                                                    echo 'Customer Tanpa User';
+                                                }
+                                            ?>
+                                        </td>
+
+                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                            <?php echo e($elemen->telepon); ?>
 
                                         </td>
-                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            <?php echo e($elemen->user->email); ?></td>
                                         <td class="p-4 whitespace-nowrap space-x-2">
-
-
-
-
+                                            <a data-modal-toggle=" product-modal"
+                                                href="<?php echo e(route('customer.edit', $elemen)); ?>"
+                                                class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-200 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
+                                                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
+                                                    </path>
+                                                    <path fill-rule="evenodd"
+                                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                                Edit item
+                                            </a>
                                         </td>
+
+
+
                                     </tr>
 
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

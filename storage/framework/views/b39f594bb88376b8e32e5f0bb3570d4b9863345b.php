@@ -1,6 +1,6 @@
-@extends('dashboard.main')
 
-@section('content-dashboard')
+
+<?php $__env->startSection('content-dashboard'); ?>
 
 
 
@@ -29,7 +29,7 @@
                                             d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    <a href="{{ route('dashboard') }}"
+                                    <a href="<?php echo e(route('dashboard')); ?>"
                                         class="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium">Dashboard</a>
                                 </div>
                             </li>
@@ -42,21 +42,21 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                     <span class="text-gray-400 ml-1 md:ml-2 text-sm font-medium"
-                                        aria-current="page">Products</span>
+                                        aria-current="page">Users</span>
                                 </div>
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">All products</h1>
+                    <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">All Customer</h1>
                 </div>
                 <div class="block sm:flex items-center md:divide-x md:divide-gray-100">
-                    <form class="sm:pr-3 mb-4 sm:mb-0" action="{{ route('barang.search') }}" method="POST">
-                        @csrf
+                    <form class="sm:pr-3 mb-4 sm:mb-0" action="<?php echo e(route('customer.search')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
                         <label for="products-search" class="sr-only">Search</label>
                         <div class="mt-1 relative sm:w-64 xl:w-96">
                             <input type="text" name="name" id="products-search"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5"
-                                placeholder="Search for products">
+                                placeholder="Search for Customer">
 
 
                         </div>
@@ -100,15 +100,20 @@
                                 </svg>
                             </a>
                         </div>
-                        <button type="button" data-modal-toggle="add-product-modal"
-                            class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-200 font-medium inline-flex items-center rounded-lg text-sm px-3 py-2 text-center sm:ml-auto">
-                            <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                            <a href="{{ route('barang.create') }}" target=" _blank">Add product </a>
+                        <div class="flex-wrap mx-auto">
+                            <a href="<?php echo e(route('customer.create')); ?>"
+                                class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-200 font-medium inline-flex items-center rounded-lg text-sm px-3 py-2 text-center sm:ml-auto">
+                                <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Add Customer (Tanpa User)
+                            </a>
+
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,53 +126,67 @@
                         <table class="table-fixed min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-100">
                                 <tr>
-                                    <th scope="col" class="p-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-all" aria-describedby="checkbox-1" type="checkbox"
-                                                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-yellow-200 h-4 w-4 rounded">
-                                            <label for="checkbox-all" class="sr-only">checkbox</label>
-                                        </div>
-                                    </th>
-                                    <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                        Product Name
-                                    </th>
 
                                     <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                                         ID
                                     </th>
+
                                     <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                        Price
+                                        Nama
+                                    </th>
+                                    <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                        Alamat
                                     </th>
                                     <th scope="col" class="p-4">
+                                        Email
+                                    </th>
+                                    <th scope="col" class="p-4">
+                                        Nomor Telepon
                                     </th>
                                 </tr>
                             </thead>
 
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($barang as $elemen)
+                                <?php $__currentLoopData = $customer; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $elemen): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="hover:bg-gray-100">
-                                        <td class="p-4 w-4">
-                                            <div class="flex items-center">
-                                                <input id="checkbox-194556" aria-describedby="checkbox-1" type="checkbox"
-                                                    class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-yellow-200 h-4 w-4 rounded">
-                                                <label for="checkbox-194556" class="sr-only">checkbox</label>
-                                            </div>
-                                        </td>
-                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                            <div class="text-base font-semibold text-gray-900">{{ $elemen->name }}
-                                            </div>
-                                            <div class="text-sm font-normal text-gray-500">{{ $elemen->description }}
-                                            </div>
+                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                            #<?php echo e($elemen->id); ?>
+
                                         </td>
 
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            #{{ $elemen->id }}
+                                            <?php echo e($elemen->nama); ?>
+
                                         </td>
+
+                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                                            <div class="text-base font-semibold text-gray-900"><?php echo e($elemen->alamat); ?>
+
+                                            </div>
+                                            <div class="text-sm font-normal text-gray-500">
+                                                <?php echo e($elemen->kabupaten . ',' . $elemen->provinsi . ' ' . $elemen->kodepos); ?>
+
+                                            </div>
+                                        </td>
+
+
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            Rp{{ $elemen->price }}</td>
+                                            <?php
+                                                if ($elemen->user != null) {
+                                                    echo $elemen->user->email;
+                                                } else {
+                                                    echo 'Customer Tanpa User';
+                                                }
+                                            ?>
+                                        </td>
+
+                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                            <?php echo e($elemen->telepon); ?>
+
+                                        </td>
                                         <td class="p-4 whitespace-nowrap space-x-2">
                                             <a data-modal-toggle=" product-modal"
-                                                href="{{ route('barang.edit', $elemen) }}"
+                                                href="<?php echo e(route('customer.edit', $elemen)); ?>"
                                                 class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-200 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
                                                 <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -180,26 +199,13 @@
                                                 </svg>
                                                 Edit item
                                             </a>
-                                            <form action="{{ route('barang.destroy', $elemen->id) }}"
-                                                class="inline" method="post">
-                                                @method('delete')
-                                                @csrf
-                                                <button
-                                                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center"
-                                                    onclick="return confirm('Are you Sure?')"><svg class="mr-2 h-5 w-5"
-                                                        fill="currentColor" viewBox="0 0 20 20"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd"
-                                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                            clip-rule="evenodd"></path>
-                                                    </svg> delete</button>
-                                            </form>
-
-
                                         </td>
+
+
+
                                     </tr>
 
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
 
@@ -212,7 +218,8 @@
                         </table>
                         <div class="row">
                             <div class="col-md-12">
-                                {{ $barang->links('pagination::tailwind') }}
+                                <?php echo e($customer->links('pagination::tailwind')); ?>
+
                             </div>
                         </div>
                     </div>
@@ -265,4 +272,6 @@
     </main>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('dashboard.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\resources\views/dashboard/customer/index.blade.php ENDPATH**/ ?>

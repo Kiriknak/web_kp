@@ -2,10 +2,13 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\BarangUserController;
+use App\Http\Controllers\PembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +29,18 @@ Route::get('/', function () {
 
 Route::get('/about', function () {
     return view('about', ['title' => "About"]);
+});
+
+Route::get('/cart', [CartController::class, 'index']);
+Route::post('/cart/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+
+Route::put('/cart/{id}', [CartController::class, 'updateCart'])->name('cart.update');
+Route::resource('items', BarangUserController::class);
+Route::get('/checkout', [PenjualanController::class, 'checkout'])->name('penjualan.order');
+Route::post('/checkout', [PenjualanController::class, 'place'])->name('penjualan.place');
+
+Route::group(['middleware' => 'user'], function () {
+    //Route::get('/penjualan',User)
 });
 
 
@@ -49,7 +64,9 @@ Route::group(['middleware' => 'admin', 'prefix' => 'dashboard'], function () {
 
     Route::resource('customer', CustomerController::class);
     Route::post('customer/search', [BarangController::class, 'search'])->name('customer.search');
-    // Route::resource('pembayaran', BarangController::class);
+    Route::resource('pembayaran', PembayaranController::class);
+
+    Route::resource('penjualan', PenjualanController::class);
 });
 Route::group(['middleware' => 'guest',], function () {
     Route::get('/login', [UserController::class, 'login'])->name('login');

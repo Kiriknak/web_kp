@@ -238,9 +238,5 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        function remove(e) {
-            e.parentNode.removeChild(e);
-        }
-    </script>
+
 @endsection

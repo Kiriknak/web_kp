@@ -109,6 +109,7 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                             <a href="<?php echo e(route('barang.create')); ?>" target=" _blank">Add product </a>
+                        </button>
                     </div>
                 </div>
             </div>

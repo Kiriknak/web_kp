@@ -6,7 +6,6 @@ use App\Models\Role;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use User\Http\Models\User;
 
 class Admin
 {

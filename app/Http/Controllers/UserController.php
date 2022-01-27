@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
@@ -20,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::latest()->paginate(10);
-        return view('dashboard.users', compact('users'), ['title' => 'Dashboard Users']);
+        return view('dashboard.users.index', compact('users'), ['title' => 'Dashboard Users']);
     }
 
     /**
@@ -180,6 +181,8 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
+        $cart =  array();
+        Session::put('cart', $cart);
         return redirect('/');
     }
 

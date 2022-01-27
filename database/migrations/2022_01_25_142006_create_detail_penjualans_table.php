@@ -19,6 +19,7 @@ class CreateDetailPenjualansTable extends Migration
             $table->foreignId('barang_id')->constrained('barang');
             $table->integer('jumlah');
             $table->decimal('harga');
+            $table->timestamps();
         });
     }
 

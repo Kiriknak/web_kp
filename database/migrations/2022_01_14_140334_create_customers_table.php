@@ -21,7 +21,7 @@ class CreateCustomersTable extends Migration
             $table->string('provinsi', 20);
             $table->string('kodepos', 6);
             $table->string('telepon', 13);
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

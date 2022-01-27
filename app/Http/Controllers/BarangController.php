@@ -16,7 +16,7 @@ class BarangController extends Controller
     public function index(Request $request)
     {
         $barang = Barang::latest()->paginate(10);
-        return view('dashboard.barang', compact('barang'), ['title' => 'Dashboard Barang']);
+        return view('dashboard.barang.index', compact('barang'), ['title' => 'Dashboard Barang']);
     }
 
 
@@ -26,7 +26,7 @@ class BarangController extends Controller
 
         $barang = Barang::where('name', 'like', '%' . $request->input('name') . '%')->paginate();
 
-        return view('dashboard.barang', compact('barang'), ['title' => 'Dashboard Barang']);
+        return view('dashboard.barang.index', compact('barang'), ['title' => 'Dashboard Barang']);
     }
 
     /**
